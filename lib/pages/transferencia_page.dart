@@ -1,3 +1,4 @@
+import 'package:bytebank/models/transferencia.dart';
 import 'package:bytebank/widgets/button.dart';
 import 'package:bytebank/widgets/input_text.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,12 @@ class TransferenciaPage extends StatelessWidget {
   final inputContaController = TextEditingController();
   final inputValorController = TextEditingController();
 
-  void _buttonEnviarPressed() {
+  void _buttonEnviarPressed(BuildContext context) {
     final conta = int.tryParse(inputContaController.text);
     final valor = double.tryParse(inputValorController.text);
     if(conta != null && valor != null){
       debugPrint("Conta: $conta, Valor: $valor");
+      Navigator.pop(context, Transferencia(conta, valor));
     }
     else{
       debugPrint("Os dados informados estão inválidos");
@@ -41,7 +43,7 @@ class TransferenciaPage extends StatelessWidget {
           ),
           Button(
             text: "Enviar",
-            onPressed: _buttonEnviarPressed,
+            onPressed: () => _buttonEnviarPressed(context),
           )
         ],
       ),

@@ -18,7 +18,6 @@ class SimpleListItem extends StatelessWidget {
           style: TextStyle(fontSize: 20),
         ),
         subtitle: Text(description),
-        trailing: Icon(Icons.more_vert),
       ),
     );
   }
