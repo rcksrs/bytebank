@@ -9,11 +9,10 @@ class MainPage extends StatelessWidget {
   final _transferencias = List<Transferencia>();
 
   void _onIconPress(BuildContext context) {
-    final router = MaterialPageRoute<Transferencia>(
-        builder: (context) => TransferenciaPage());
+    final router = MaterialPageRoute<Transferencia>(builder: (context) => TransferenciaPage());
     final future = Navigator.push(context, router);
     future.then((transferencia) {
-      if(transferencia != null){
+      if (transferencia != null) {
         debugPrint(transferencia.toString());
         _transferencias.add(transferencia);
       }
@@ -27,8 +26,8 @@ class MainPage extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: Text("Bytebank")),
         body: SimpleList(_transferencias),
-        floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add), onPressed: () => _onIconPress(context)),
+        floatingActionButton:
+            FloatingActionButton(child: Icon(Icons.add), onPressed: () => _onIconPress(context)),
       ),
     );
   }

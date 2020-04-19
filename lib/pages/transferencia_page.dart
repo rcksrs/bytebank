@@ -12,11 +12,11 @@ class TransferenciaPage extends StatelessWidget {
   void _buttonEnviarPressed(BuildContext context) {
     final conta = int.tryParse(inputContaController.text);
     final valor = double.tryParse(inputValorController.text);
-    if(conta != null && valor != null){
+
+    if (conta != null && valor != null) {
       debugPrint("Conta: $conta, Valor: $valor");
       Navigator.pop(context, Transferencia(conta, valor));
-    }
-    else{
+    } else {
       debugPrint("Os dados informados estão inválidos");
     }
   }
@@ -24,9 +24,7 @@ class TransferenciaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Transferência'),
-      ),
+      appBar: AppBar(title: Text('Transferência')),
       body: Column(
         children: <Widget>[
           InputText(
@@ -41,10 +39,7 @@ class TransferenciaPage extends StatelessWidget {
             icon: Icons.attach_money,
             controller: inputValorController,
           ),
-          Button(
-            text: "Enviar",
-            onPressed: () => _buttonEnviarPressed(context),
-          )
+          Button(text: "Enviar", onPressed: () => _buttonEnviarPressed(context))
         ],
       ),
     );
