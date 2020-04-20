@@ -4,7 +4,7 @@ class ContactListItem extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  const ContactListItem({Key key, this.title, this.subtitle}) : super(key: key);
+  const ContactListItem(this.title, this.subtitle);
 
   @override
   Widget build(BuildContext context) {

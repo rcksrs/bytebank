@@ -1,5 +1,5 @@
 import 'package:bytebank/models/transferencia.dart';
-import 'package:bytebank/widgets/simple_list_item.dart';
+import 'package:bytebank/widgets/list/simple_list_item.dart';
 import 'package:flutter/material.dart';
 
 class SimpleList extends StatefulWidget {
@@ -20,7 +20,7 @@ class _SimpleListState extends State<SimpleList> {
             itemCount: widget.transferencias.length,
             itemBuilder: (context, index) {
               final transferencia = widget.transferencias[index];
-              return SimpleListItem(transferencia.conta.toString(), transferencia.valor.toString());
+              return SimpleListItem(transferencia.contato.nome, transferencia.valor.toString());
             });
   }
 }

@@ -1,11 +1,10 @@
+import 'package:bytebank/models/contato.dart';
 import 'package:bytebank/models/transferencia.dart';
-import 'package:bytebank/widgets/button.dart';
-import 'package:bytebank/widgets/input_text.dart';
+import 'package:bytebank/widgets/form/button.dart';
+import 'package:bytebank/widgets/form/input_text.dart';
 import 'package:flutter/material.dart';
 
-class TransferenciaPage extends StatelessWidget {
-  static const String routeName = '/transferencia';
-
+class NovaTransferenciaPage extends StatelessWidget {
   final inputContaController = TextEditingController();
   final inputValorController = TextEditingController();
 
@@ -15,7 +14,7 @@ class TransferenciaPage extends StatelessWidget {
 
     if (conta != null && valor != null) {
       debugPrint("Conta: $conta, Valor: $valor");
-      Navigator.pop(context, Transferencia(conta, valor));
+      Navigator.pop(context, Transferencia(Contato("Teste", conta), valor));
     } else {
       debugPrint("Os dados informados estão inválidos");
     }

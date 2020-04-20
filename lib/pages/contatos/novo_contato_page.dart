@@ -1,6 +1,7 @@
+import 'package:bytebank/config/database_config.dart';
 import 'package:bytebank/models/contato.dart';
-import 'package:bytebank/widgets/button.dart';
-import 'package:bytebank/widgets/input_text.dart';
+import 'package:bytebank/widgets/form/button.dart';
+import 'package:bytebank/widgets/form/input_text.dart';
 import 'package:flutter/material.dart';
 
 class NovoContatoPage extends StatelessWidget {
@@ -12,9 +13,9 @@ class NovoContatoPage extends StatelessWidget {
     final conta = int.tryParse(inputConta.text);
 
     if (nome != null && conta != null) {
-      final c = Contato(1, nome, conta);
-      debugPrint(c.toString());
-      Navigator.pop(context, c);
+      final contato = Contato(nome, conta);
+      DatabaseConfig().save(contato).then((id) => Navigator.pop(context));
+      
     } else {
       debugPrint("Os dados informados estão inválidos");
     }

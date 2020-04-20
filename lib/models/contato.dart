@@ -3,7 +3,7 @@ class Contato {
   String nome;
   int conta;
 
-  Contato(this.id, this.nome, this.conta);
+  Contato(this.nome, this.conta, {this.id});
 
   Contato.fromJson(Map<String, dynamic> json) {
     id = json['id'];

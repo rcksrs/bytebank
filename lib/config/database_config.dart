@@ -3,17 +3,15 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseConfig {
-  Future<Database> createDatabase() async {
-    final databasePath = await getDatabasesPath();
-    final path = join(databasePath, "bytebank.db");
-    
-    return openDatabase(path, version: 1, onCreate: (db, version) {
+  Future<Database> getDatabase() async {
+    final path = join(await getDatabasesPath(), "bytebank.db");    
+    return openDatabase(path, version: 1, onDowngrade: onDatabaseDowngradeDelete, onCreate: (db, version) {
       db.execute("create table contatos(id integer primary key, nome text, conta number)");
     });
   }
 
   Future<List<Contato>> findAll() async {
-    final database = await createDatabase();
+    final database = await getDatabase();
     final contatosMap = await database.query("contatos");
     final contatos = List<Contato>();
 
@@ -25,7 +23,7 @@ class DatabaseConfig {
   }
 
   Future<int> save(Contato contato) async {
-    final database = await createDatabase();
+    final database = await getDatabase();
     return database.insert("contatos", contato.toJson());
   }
 }

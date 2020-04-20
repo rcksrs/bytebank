@@ -1,4 +1,4 @@
-import 'package:bytebank/pages/dashboard_page.dart';
+import 'package:bytebank/pages/main.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(BytebankApp());
@@ -16,7 +16,7 @@ class BytebankApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home: DashboardPage(),
+      home: MainPage(),
     );
   }
 }
