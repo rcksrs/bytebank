@@ -1,15 +1,17 @@
+import 'package:bytebank/models/contato.dart';
 import 'package:flutter/material.dart';
 
 class ContactListItem extends StatelessWidget {
-  final String title;
-  final String subtitle;
+  final Contato contato;
+  final Function onClick;
 
-  const ContactListItem(this.title, this.subtitle);
+  const ContactListItem(this.contato, {this.onClick});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: () => onClick(),
         leading: Container(
           width: 50,
           height: 50,
@@ -21,8 +23,8 @@ class ContactListItem extends StatelessWidget {
             ),
           ),
         ),
-        title: Text(title, style: TextStyle(fontSize: 18)),
-        subtitle: Text(subtitle),
+        title: Text(contato.nome, style: TextStyle(fontSize: 18)),
+        subtitle: Text(contato.conta.toString()),
       ),
     );
   }

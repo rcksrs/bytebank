@@ -1,20 +1,23 @@
 import 'package:bytebank/models/contato.dart';
 import 'package:bytebank/models/transferencia.dart';
+import 'package:bytebank/webclient/transferencia_service.dart';
 import 'package:bytebank/widgets/form/button.dart';
 import 'package:bytebank/widgets/form/input_text.dart';
 import 'package:flutter/material.dart';
 
 class NovaTransferenciaPage extends StatelessWidget {
-  final inputContaController = TextEditingController();
-  final inputValorController = TextEditingController();
+  final _inputValor = TextEditingController();
+  final Contato contato;
 
-  void _buttonEnviarPressed(BuildContext context) {
-    final conta = int.tryParse(inputContaController.text);
-    final valor = double.tryParse(inputValorController.text);
+  NovaTransferenciaPage(this.contato);
 
-    if (conta != null && valor != null) {
-      debugPrint("Conta: $conta, Valor: $valor");
-      Navigator.pop(context, Transferencia(Contato("Teste", conta), valor));
+  void _buttonEnviarPressed(BuildContext context) async {
+    final valor = double.tryParse(_inputValor.text);
+
+    if (valor != null) {
+      final transferencia = Transferencia(valor, contato);
+      await TransferenciaService.save(transferencia);
+      Navigator.pop(context);
     } else {
       debugPrint("Os dados informados estão inválidos");
     }
@@ -27,16 +30,21 @@ class NovaTransferenciaPage extends StatelessWidget {
       body: Column(
         children: <Widget>[
           InputText(
-            hint: "Número da Conta",
+            hint: contato.nome,
+            icon: Icons.person,
+            enabled: false,
+          ),
+          InputText(
+            hint: contato.conta.toString(),
             type: TextInputType.number,
             icon: Icons.account_balance_wallet,
-            controller: inputContaController,
+            enabled: false,
           ),
           InputText(
             hint: "Valor",
             type: TextInputType.numberWithOptions(decimal: true, signed: false),
             icon: Icons.attach_money,
-            controller: inputValorController,
+            controller: _inputValor,
           ),
           Button(text: "Enviar", onPressed: () => _buttonEnviarPressed(context))
         ],

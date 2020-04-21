@@ -1,13 +1,25 @@
 import 'package:bytebank/models/contato.dart';
 
 class Transferencia {
-  final double valor;
-  final Contato contato;
+  String id;
+  double valor;
+  Contato contato;
 
-  Transferencia(this.contato, this.valor);
+  Transferencia(this.valor, this.contato, {this.id});
 
-  @override
-  String toString() {
-    return "Transferência[Contato: ${contato.nome}, Valor: $valor]";
+  Transferencia.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    valor = json['value'];
+    contato = json['contact'] != null ? new Contato.fromJson(json['contact']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['value'] = this.valor;
+    if (this.contato != null) {
+      data['contact'] = this.contato.toJson();
+    }
+    return data;
   }
 }

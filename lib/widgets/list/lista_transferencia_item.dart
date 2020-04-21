@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class SimpleListItem extends StatelessWidget {
+class ListaTransferenciaItem extends StatelessWidget {
   final String description;
   final IconData icon;
   final String title;
 
-  SimpleListItem(this.title, this.description, {this.icon});
+  ListaTransferenciaItem(this.title, this.description, {this.icon});
 
   @override
   Widget build(BuildContext context) {

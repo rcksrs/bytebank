@@ -14,7 +14,7 @@ class NovoContatoPage extends StatelessWidget {
 
     if (nome != null && conta != null) {
       final contato = Contato(nome, conta);
-      DatabaseConfig().save(contato).then((id) => Navigator.pop(context));
+      DatabaseConfig.save(contato).then((id) => Navigator.pop(context));
       
     } else {
       debugPrint("Os dados informados estão inválidos");

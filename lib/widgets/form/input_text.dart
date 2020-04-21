@@ -5,8 +5,9 @@ class InputText extends StatelessWidget {
   final IconData icon;
   final TextInputType type;
   final TextEditingController controller;
+  final bool enabled;
 
-  const InputText({Key key, this.hint, this.icon, this.controller, this.type}) : super(key: key);  
+  const InputText({Key key, this.hint, this.icon, this.controller, this.type, this.enabled = true}) : super(key: key);  
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class InputText extends StatelessWidget {
           style: TextStyle(fontSize: 20),
           controller: controller,
           keyboardType: type,
+          enabled: enabled,
           decoration: InputDecoration(
             hintText: hint,
             border: InputBorder.none,

@@ -2,16 +2,16 @@ import 'package:bytebank/models/contato.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-class DatabaseConfig {
-  Future<Database> getDatabase() async {
+abstract class DatabaseConfig {
+  static Future<Database> _getDatabase() async {
     final path = join(await getDatabasesPath(), "bytebank.db");    
     return openDatabase(path, version: 1, onDowngrade: onDatabaseDowngradeDelete, onCreate: (db, version) {
-      db.execute("create table contatos(id integer primary key, nome text, conta number)");
+      db.execute("create table contatos(id integer primary key, name text, accountNumber number)");
     });
   }
 
-  Future<List<Contato>> findAll() async {
-    final database = await getDatabase();
+  static Future<List<Contato>> findAll() async {
+    final database = await _getDatabase();
     final contatosMap = await database.query("contatos");
     final contatos = List<Contato>();
 
@@ -22,8 +22,8 @@ class DatabaseConfig {
     return contatos;
   }
 
-  Future<int> save(Contato contato) async {
-    final database = await getDatabase();
+  static Future<int> save(Contato contato) async {
+    final database = await _getDatabase();
     return database.insert("contatos", contato.toJson());
   }
 }
